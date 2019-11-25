@@ -4,29 +4,42 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
   <title>Family Draw</title>
 </head>
 <body>
-  <div id="app">
-    <section id="group1">
-      <input id="name1" type="text" onchange="updated()">
-      <input id="names" type="textarea" onchange="area()">
-    </section>
-    <!-- <input id="name1" type="text">
-    <input id="name2" type="text"> -->
-    <button onclick="addName();">Add</button>
-    <p>{{ message }}</p>
-    <ul v-if="names.length > 0">
-      <li v-for="name in names">{{ name[0] }}</li>
-    </ul>
+  <div class="container">
+    <h1>Family Draw Machine</h1>
+    <p>Type the names that will be participating in the draw in the box below. I'm only setup to handle names without spaces or special characters, so if you have any concerns, maybe try a test run and check the spoilers to make sure it worked like you want it to, then come back and do a new shuffle.</p>
+    <p>For a simple draw, where everyone can draw anyone else (except themselves), just put each name on its own line. If you want a fancy draw where spouses or siblings can't draw each other, put their names on the same row.</p>
+    <h4>Example 1: Simple Draw</h4>
+    <pre>
+      Wakko
+      Yakko
+      Dot
+      Pinky
+      TheBrain
+      Buttons
+      Mindy
+      TheMime
+    </pre>
+    <p>These Animaniacs can each draw any other Animaniac, Wakko could draw Yakko, Pinky could draw TheBrain</p>
+    <h4>Example 2: Fancy Draw</h4>
+    <pre>
+      Bubs CoachZ
+      Homestar Marzipan
+      StrongBad StrongSad StrongMad
+      TheCheat
+    </pre>
+    <p>Homestar and Marzipan can't draw each other, but they could draw anyone else. The brothers Strong would not draw each other, but could draw everyone else. TheCheat would not be limited at all, and could end up drawing anyone.</p>
     <hr>
-    <button onclick="generateDraws();">Generate Draws</button>
-    
-    <hr>
-    <button onclick="download(testData, 'test.txt', 'text/plain');">Download</button>
+    <h4>Your turn</h4>
+    <p>Go for it! Copy paste one of the above examples if you want to see how it works, or fill in your own names.</p>
+    <textarea id="names"></textarea>
+    <button class="btn btn-primary" onclick="doit()">Draw Names</button>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-  <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
-  <script src="v2.js"></script>
+  <script src="familyDraw.js"></script>
+  <script>sessionStorage.clear();</script>
 </body>
 </html>

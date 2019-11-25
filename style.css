@@ -1,0 +1,16 @@
+textarea {
+  width: 100%;
+  height: 200px;
+}
+#showListsContainer,
+#showDrawLettersContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+pre {
+  padding: 10px;
+  border: 1px solid grey;
+  border-radius: 5px;
+}

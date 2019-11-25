@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <title>Family Draw</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Finished Drawing</h1>
+    <p>We've got your draws ready. If you like to keep everything as a surprise so that no one (including you) knows who anyone else drew, we have to ways to try to accomplish this. No matter what you pick, you can use the download button at the bottom to download a copy of the end results. You can save this (spoilers if you open it!) as a backup if you'd like.</p>
+    <hr>
+    <h4>Send Emails</h4>
+    <p>I'll give you links that you can click that will generate emails. You'll still have to fill out who the email is to, and press send, but if you have good self control, and can avoid looking at the message that I wrote for you, then you can choose this option, send the emails, and go on to the next step yourself.</p>
+    <button onclick="emailLinks()">Show Email Links</button>
+    <div id="emailLinksContainer"></div>
+    <hr>
+    <h4>Show Lists</h4>
+    <p>If you don't have as good of self control, or have an eidetic memory, but still want the surprise, then you'll need a friend to help on the next step. You can still do this step though. Use the emails link above, or this show lists button to show you randomized lists of the draw participants for you to send to each person in the draw.</p>
+    <button onclick="showLists()">Show Lists</button>
+    <div id="showListsContainer"></div>
+    <hr>
+    <h4>I'm the boss</h4>
+    <p>I don't like surprises, or I do like knowing everyone's draw, or something else that causes me not to like the other options. Just show me the secrets!</p>
+    <button onclick="spoilers()">I'm the boss (spoilers!)</button>
+    <div id="spoilersContainer"></div>
+    <hr>
+    <a class="btn btn-outline-danger" href="index.html">Start Over</a>
+    <button class="btn btn-secondary" onclick="callDownloader()">Download Everyone's Draws</button>
+    <a class="btn btn-primary" href="step3.html">Next Step Please</a>
+  </div>
+  <script src="familyDraw.js"></script>
+  <script>checkData();</script>
+</body>
+</html>

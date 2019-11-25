@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <title>Family Draw</title>
+</head>
+<body>
+  <div class="container">
+    <h1>You did it!</h1>
+    <p>Now that we've sent everyone their lists, it's time to send them the letters they drew. If you remember some of the lists that you sent people, maybe have someone else do this next part.</p>
+    <hr>
+    <h4>Show Draw Letters</h4>
+    <p>They've already got their lists, they just don't know who they drew from that list. Clicking the button below will show you the letters for each person's list. They can then match the letter you send them to the list they previously received in order to find out who they drew.</p>
+    <button class="btn btn-primary" onclick="showDrawLetters()">Show Draw Letters</button>
+    <div id="showDrawLettersContainer"></div>
+    <hr>
+    <p>All finished! Don't forget to download a backup list if you want.</p>
+    <a class="btn btn-outline-danger" href="index.html">Start Over</a>
+    <button class="btn btn-secondary" onclick="callDownloader()">Download Everyone's Draws</button>
+  </div>
+  <script src="familyDraw.js"></script>
+  <script>checkData();</script>
+</body>
+</html>
