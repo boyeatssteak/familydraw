@@ -1,2 +1,32 @@
-<script src="v1.js"></script>
-<h1>hello</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Family Draw</title>
+</head>
+<body>
+  <div id="app">
+    <section id="group1">
+      <input id="name1" type="text" onchange="updated()">
+      <input id="names" type="textarea" onchange="area()">
+    </section>
+    <!-- <input id="name1" type="text">
+    <input id="name2" type="text"> -->
+    <button onclick="addName();">Add</button>
+    <p>{{ message }}</p>
+    <ul v-if="names.length > 0">
+      <li v-for="name in names">{{ name[0] }}</li>
+    </ul>
+    <hr>
+    <button onclick="generateDraws();">Generate Draws</button>
+    
+    <hr>
+    <button onclick="download(testData, 'test.txt', 'text/plain');">Download</button>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+  <script src="v2.js"></script>
+</body>
+</html>
