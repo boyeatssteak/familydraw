@@ -48,7 +48,6 @@ function testDraws(array) {
         nameTwo = array[0];
     }
     result[i] = testPair(nameOne,nameTwo);
-    // console.log("Testing " + nameOne + " with " + nameTwo + ": " + result[i]);
   }
   return !(result.indexOf(false) >= 0);
 }
@@ -62,7 +61,6 @@ function fac(num) {
   }
   return factorial;
 }
-// console.log(fac(12));
 
 function doit() {
   let allParticipantsArray = parseNames();
@@ -80,17 +78,14 @@ function doit() {
       successfulDraw = testDraws(allParticipants);
   }
   if(iterations >= limit) {
-    console.log(limit, iterations, "no solution within limit");
     checkData();
   } else {
-    console.log(iterations, allParticipants);
     for(let i = 0; i < allParticipantsOrdered.length; i++) {
       let drawn = getDrawnName(allParticipants, allParticipants.indexOf(allParticipantsOrdered[i]));
       let arr = allParticipants.slice(0);   
       shuffleGroup(arr);
       allParticipantsOrdered.splice(i, 1, [allParticipantsOrdered[i], arr, drawn]);
     }
-    console.log(allParticipantsOrdered);
     sessionStorage.setItem('data', JSON.stringify(allParticipantsOrdered));
     sessionStorage.setItem('iterations', iterations);
     let a = document.createElement('a');
@@ -106,19 +101,6 @@ function getDrawnName(array, index) {
     return array[index + 1];
   }
 }
-// let arr = ["josh", "bo", "bri", "zak", "mike"]; // testing getDrawnName()
-// for(let i = 0; i < arr.length; i++) {
-//   console.log(getDrawnName(arr, i));
-// }
-
-// function generateOutput(iterations, allParticipantsOrdered, allParticipants) {
-//   let output = "It took me " + iterations + " shuffles before I found a combo that worked, but here are the results:";
-//   for(let i = 0; i < allParticipantsOrdered.length; i++) {
-//     let drawn = getDrawnName(allParticipants, allParticipants.indexOf(allParticipantsOrdered[i]));
-//     output += "\n" + allParticipantsOrdered[i] + " drew " + drawn;
-//   }
-//   return output;
-// }
 
 function generateFileContents(data, iterations) {
   let output = "It took me " + iterations + " shuffles before I found a combo that worked, but here are the results:";
@@ -131,7 +113,6 @@ function generateFileContents(data, iterations) {
 
 let key = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 function generateList(array) {
-  // console.log(array);
   let output = array[0].toUpperCase();
   for(let i = 0; i < array[1].length; i++) {
     output += "\n" + key[i] + ": " + array[1][i];
@@ -147,54 +128,57 @@ function download(content, fileName, contentType) {
   a.click();
 }
 
-// function loadData() {
-//   let dataElement = document.getElementById("stuff");
-//   let data = JSON.parse(sessionStorage.getItem('data'));
-//   // console.log(data);
-// }
 function showLists() {
   let dataElement = document.getElementById("showListsContainer");
-  let data = JSON.parse(sessionStorage.getItem('data'));
-  // console.log(data);
-  for(let i = 0; i < data.length; i++) {
-    let el = document.createElement('pre');
-    // console.log("name:", data[i]);
-    el.innerHTML = generateList(data[i]);
-    dataElement.appendChild(el)
+  if (dataElement.innerHTML.length > 0) {
+    dataElement.innerHTML = "";
+  } else {
+    let data = JSON.parse(sessionStorage.getItem('data'));
+    for(let i = 0; i < data.length; i++) {
+      let el = document.createElement('pre');
+      el.innerHTML = generateList(data[i]);
+      dataElement.appendChild(el)
+    }
   }
 }
 function emailLinks() {
   let dataElement = document.getElementById("emailLinksContainer");
-  let data = JSON.parse(sessionStorage.getItem('data'));
-  let list = document.createElement('ul');
-  for(let i = 0; i < data.length; i++) {
-    let li = document.createElement('li');
-    let link = document.createElement('a');
-    console.log(data[i]);
-    let name = (data[i][0]).toUpperCase();
-    console.log(name);
-    let subject = "Family Draw List for " + name;
-    let body = "This is the list of people who are in the family draw with you. Your list is different than everyone else's, and you'll receive the letter indicating who your draw is shortly.\n\n";
-    body += generateList(data[i]);
-    link.setAttribute("href", "mailto:?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body));
-    link.setAttribute("target", "_blank");
-    link.innerHTML = "Email to " + name;
-    li.appendChild(link);
-    list.appendChild(li);
+  if (dataElement.innerHTML.length > 0) {
+    dataElement.innerHTML = "";
+  } else {
+    let data = JSON.parse(sessionStorage.getItem('data'));
+    let list = document.createElement('ul');
+    for(let i = 0; i < data.length; i++) {
+      let li = document.createElement('li');
+      let link = document.createElement('a');
+      let name = (data[i][0]).toUpperCase();
+      let subject = "Family Draw List for " + name;
+      let body = "This is the list of people who are in the family draw with you. Your list is different than everyone else's, and you'll receive the letter indicating who your draw is shortly.\n\n";
+      body += generateList(data[i]);
+      link.setAttribute("href", "mailto:?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body));
+      link.setAttribute("target", "_blank");
+      link.innerHTML = "Email to " + name;
+      li.appendChild(link);
+      list.appendChild(li);
+    }
+    dataElement.appendChild(list);
   }
-  dataElement.appendChild(list);
 }
 function spoilers() {
   let dataElement = document.getElementById("spoilersContainer");
-  let data = JSON.parse(sessionStorage.getItem('data'));
-  let list = document.createElement('ul');
-  for(let i = 0; i < data.length; i++) {
-    let name = data[i];
-    let li = document.createElement('li');
-    li.innerHTML = "<strong>" + name[0] + "</strong> drew <strong>" + name[2] + "</strong>";
-    list.appendChild(li);
+  if (dataElement.innerHTML.length > 0) {
+    dataElement.innerHTML = "";
+  } else {
+    let data = JSON.parse(sessionStorage.getItem('data'));
+    let list = document.createElement('ul');
+    for(let i = 0; i < data.length; i++) {
+      let name = data[i];
+      let li = document.createElement('li');
+      li.innerHTML = "<strong>" + name[0] + "</strong> drew <strong>" + name[2] + "</strong>";
+      list.appendChild(li);
+    }
+    dataElement.appendChild(list);
   }
-  dataElement.appendChild(list);
 }
 function callDownloader() {
   let data = JSON.parse(sessionStorage.getItem('data'));
@@ -220,16 +204,20 @@ function formatDate(date) {
 
 function showDrawLetters() {
   let dataElement = document.getElementById("showDrawLettersContainer");
-  let data = JSON.parse(sessionStorage.getItem('data'));
-  let message1 = "Merry Christmas "
-  let message2 = "! 🎁🎄♥️\nYou drew letter ";
-  for(let i = 0; i < data.length; i++) {
-    let drawData = data[i];
-    let drawIndex = drawData[1].indexOf(drawData[2]);
-    let el = document.createElement('pre');
-    let message = message1 + drawData[0] + message2 + key[drawIndex];
-    el.innerHTML = message;
-    dataElement.appendChild(el)
+  if (dataElement.innerHTML.length > 0) {
+    dataElement.innerHTML = "";
+  } else {
+    let data = JSON.parse(sessionStorage.getItem('data'));
+    let message1 = "Merry Christmas "
+    let message2 = "! 🎁🎄♥️\nYou drew letter ";
+    for(let i = 0; i < data.length; i++) {
+      let drawData = data[i];
+      let drawIndex = drawData[1].indexOf(drawData[2]);
+      let el = document.createElement('pre');
+      let message = message1 + drawData[0] + message2 + key[drawIndex];
+      el.innerHTML = message;
+      dataElement.appendChild(el)
+    }
   }
 }
 
