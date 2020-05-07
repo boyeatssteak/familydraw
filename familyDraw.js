@@ -4,7 +4,9 @@ function parseNames() {
   let inputAsArray = [];
   for(let line of lines) {
     line = trimSpaces(line);
-    inputAsArray.push(line.split(" "));
+    if (line.length > 0) {
+      inputAsArray.push(line.split(" "));
+    }
   }
   return inputAsArray;
 }
@@ -82,7 +84,7 @@ function doit() {
   } else {
     for(let i = 0; i < allParticipantsOrdered.length; i++) {
       let drawn = getDrawnName(allParticipants, allParticipants.indexOf(allParticipantsOrdered[i]));
-      let arr = allParticipants.slice(0);   
+      let arr = allParticipants.slice(0);
       shuffleGroup(arr);
       allParticipantsOrdered.splice(i, 1, [allParticipantsOrdered[i], arr, drawn]);
     }
